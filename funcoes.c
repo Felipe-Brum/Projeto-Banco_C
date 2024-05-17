@@ -101,3 +101,35 @@ void deposito(Cliente clientes[], int num_clientes) {
 
     printf("CPF não encontrado!\n");
 }
+
+void extrato(Cliente clientes[], int num_clientes) {
+    char cpf[11];
+    char senha[20];
+    printf("Digite o CPF: ");
+    scanf("%s", cpf);
+    printf("Digite a senha: ");
+    scanf("%s", senha);
+
+    for (int i = 0; i < num_clientes; i++) {
+        if (strcmp(clientes[i].cpf, cpf) == 0 && strcmp(clientes[i].senha, senha) == 0) {
+            char filename[64];
+            sprintf(filename, "extrato_%s.txt", cpf);
+            FILE *fp = fopen(filename, "w");
+            if (fp == NULL) {
+                printf("Erro ao criar o arquivo de extrato!\n");
+                return;
+            }
+
+            fprintf(fp, "Extrato para o cliente %s:\n", clientes[i].nome);
+            int start_index = (clientes[i].num_operacoes > 100) ? (clientes[i].num_operacoes - 100) : 0;
+            for (int j = start_index; j < clientes[i].num_operacoes; j++) {
+                fprintf(fp, "%s: %.2lf\n", clientes[i].operacoes[j].tipo, clientes[i].operacoes[j].valor);
+            }
+            fclose(fp);
+            printf("Extrato gerado com sucesso!\n");
+            return;
+        }
+    }
+
+    printf("CPF ou senha incorretos!\n");
+}

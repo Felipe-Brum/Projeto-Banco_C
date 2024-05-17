@@ -14,6 +14,7 @@ int main() {
         printf("3. Listar clientes\n");
         printf("4. Débito\n");
         printf("5. Depósito\n");
+        printf("6. Extrato\n");
         printf("0. Sair\n");
         scanf("%d", &opcao);
 
@@ -32,6 +33,9 @@ int main() {
                 break;
             case 5:
                 deposito(clientes, num_clientes);
+                break;
+            case 6:
+                extrato(clientes, num_clientes);
                 break;
             case 0:
                 printf("Saindo...\n");
