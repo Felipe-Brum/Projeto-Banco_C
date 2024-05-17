@@ -9,12 +9,17 @@ int main() {
     int opcao;
 
     do {
-        printf("1. Novo cliente\n0. Sair\n");
+        printf("1. Novo cliente\n");
+        printf("2. Apaga cliente\n");
+        printf("0. Sair\n");
         scanf("%d", &opcao);
 
         switch(opcao) {
             case 1:
                 novo_cliente(clientes, &num_clientes);
+                break;
+            case 2:
+                apaga_cliente(clientes, &num_clientes);
                 break;
             case 0:
                 printf("Saindo...\n");
