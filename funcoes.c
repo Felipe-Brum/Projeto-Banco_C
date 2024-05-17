@@ -133,3 +133,51 @@ void extrato(Cliente clientes[], int num_clientes) {
 
     printf("CPF ou senha incorretos!\n");
 }
+
+void transferencia(Cliente clientes[], int num_clientes) {
+    char cpf_origem[11], cpf_destino[11];
+    char senha[20];
+    double valor;
+    printf("Digite o CPF da conta de origem: ");
+    scanf("%s", cpf_origem);
+    printf("Digite a senha: ");
+    scanf("%s", senha);
+    printf("Digite o CPF da conta de destino: ");
+    scanf("%s", cpf_destino);
+    printf("Digite o valor a ser transferido: ");
+    scanf("%lf", &valor);
+
+    int indice_origem = -1, indice_destino = -1;
+    for (int i = 0; i < num_clientes; i++) {
+        if (strcmp(clientes[i].cpf, cpf_origem) == 0 && strcmp(clientes[i].senha, senha) == 0) {
+            indice_origem = i;
+        }
+        if (strcmp(clientes[i].cpf, cpf_destino) == 0) {
+            indice_destino = i;
+        }
+    }
+
+    if (indice_origem != -1 && indice_destino != -1) {
+        double taxa = (clientes[indice_origem].tipo_conta == 1) ? 0.05 : 0.03;
+        double saldo_minimo = (clientes[indice_origem].tipo_conta == 1) ? -1000.00 : -5000.00;
+        double valor_com_taxa = valor + (valor * taxa);
+
+        if (clientes[indice_origem].saldo - valor_com_taxa >= saldo_minimo) {
+            clientes[indice_origem].saldo -= valor_com_taxa;
+            strcpy(clientes[indice_origem].operacoes[clientes[indice_origem].num_operacoes].tipo, "Transferencia Enviada");
+            clientes[indice_origem].operacoes[clientes[indice_origem].num_operacoes].valor = -valor_com_taxa;
+            clientes[indice_origem].num_operacoes++;
+
+            clientes[indice_destino].saldo += valor;
+            strcpy(clientes[indice_destino].operacoes[clientes[indice_destino].num_operacoes].tipo, "Transferencia Recebida");
+            clientes[indice_destino].operacoes[clientes[indice_destino].num_operacoes].valor = valor;
+            clientes[indice_destino].num_operacoes++;
+
+            printf("Transferência realizada com sucesso!\n");
+        } else {
+            printf("Saldo insuficiente para realizar a transferência!\n");
+        }
+    } else {
+        printf("CPF de origem ou senha incorretos, ou CPF de destino não encontrado!\n");
+    }
+}
