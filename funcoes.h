@@ -26,5 +26,7 @@ void debito(Cliente clientes[], int num_clientes);
 void deposito(Cliente clientes[], int num_clientes);
 void extrato(Cliente clientes[], int num_clientes);
 void transferencia(Cliente clientes[], int num_clientes);
+void salvar_dados(Cliente clientes[], int num_clientes);
+void carregar_dados(Cliente clientes[], int *num_clientes);
 
 #endif

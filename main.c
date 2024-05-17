@@ -6,6 +6,8 @@ int main() {
     int num_clientes = 0;
     int opcao;
 
+    carregar_dados(clientes, &num_clientes);
+
     do {
         printf("1. Novo cliente\n2. Apaga cliente\n3. Listar clientes\n4. Débito\n5. Depósito\n6. Extrato\n7. Transferência Entre Contas\n0. Sair\n");
         printf("Digite a opção: ");
@@ -40,6 +42,8 @@ int main() {
                 printf("Opção inválida!\n");
         }
     } while(opcao != 0);
+
+    salvar_dados(clientes, num_clientes);
 
     return 0;
 }
