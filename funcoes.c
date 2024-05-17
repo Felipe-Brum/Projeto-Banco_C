@@ -181,3 +181,33 @@ void transferencia(Cliente clientes[], int num_clientes) {
         printf("CPF de origem ou senha incorretos, ou CPF de destino não encontrado!\n");
     }
 }
+
+void salvar_dados(Cliente clientes[], int num_clientes) {
+    FILE *fp = fopen("dados.bin", "wb");
+    if (fp == NULL) {
+        printf("Erro ao abrir o arquivo para escrita!\n");
+        return;
+    }
+    fwrite(&num_clientes, sizeof(int), 1, fp);
+    fwrite(clientes, sizeof(Cliente), num_clientes, fp);
+    if (fclose(fp) == 0) {
+        printf("Dados salvos com sucesso!\n");
+    } else {
+        printf("Erro ao fechar o arquivo!\n");
+    }
+}
+
+void carregar_dados(Cliente clientes[], int *num_clientes) {
+    FILE *fp = fopen("dados.bin", "rb");
+    if (fp == NULL) {
+        printf("Erro ao abrir o arquivo para leitura!\n");
+        return;
+    }
+    fread(num_clientes, sizeof(int), 1, fp);
+    fread(clientes, sizeof(Cliente), *num_clientes, fp);
+    if (fclose(fp) == 0) {
+        printf("Dados carregados com sucesso!\n");
+    } else {
+        printf("Erro ao fechar o arquivo!\n");
+    }
+}
