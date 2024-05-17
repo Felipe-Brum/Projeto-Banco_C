@@ -11,6 +11,7 @@ int main() {
     do {
         printf("1. Novo cliente\n");
         printf("2. Apaga cliente\n");
+        printf("3. Listar clientes\n");
         printf("0. Sair\n");
         scanf("%d", &opcao);
 
@@ -20,6 +21,9 @@ int main() {
                 break;
             case 2:
                 apaga_cliente(clientes, &num_clientes);
+                break;
+            case 3:
+                listar_clientes(clientes, num_clientes);
                 break;
             case 0:
                 printf("Saindo...\n");
