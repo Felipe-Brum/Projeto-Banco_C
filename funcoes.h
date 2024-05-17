@@ -24,5 +24,6 @@ typedef struct {
 
 void novo_cliente(Cliente clientes[], int *num_clientes);
 void apaga_cliente(Cliente clientes[], int *num_clientes);
+void listar_clientes(Cliente clientes[], int num_clientes);
 
 #endif

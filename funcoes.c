@@ -12,8 +12,8 @@ void novo_cliente(Cliente clientes[], int *num_clientes) {
     printf("Digite o saldo inicial: ");
     scanf("%lf", &clientes[*num_clientes].saldo);
     printf("Digite a senha: ");
-    scanf("\n"); 
-    fgets(clientes[*num_clientes].senha, 20, stdin); 
+    scanf("\n"); // Limpa o buffer
+    fgets(clientes[*num_clientes].senha, 20, stdin); // Lê a senha até a nova linha
     clientes[*num_clientes].num_operacoes = 0;
     (*num_clientes)++;
 }
@@ -35,4 +35,14 @@ void apaga_cliente(Cliente clientes[], int *num_clientes) {
     }
 
     printf("CPF nao encontrado!\n");
+}
+
+void listar_clientes(Cliente clientes[], int num_clientes) {
+    for (int i = 0; i < num_clientes; i++) {
+        printf("Nome: %s\n", clientes[i].nome);
+        printf("CPF: %s\n", clientes[i].cpf);
+        printf("Tipo de conta: %d\n", clientes[i].tipo_conta);
+        printf("Saldo: %.2lf\n", clientes[i].saldo);
+        printf("Numero de operacoes: %d\n", clientes[i].num_operacoes);
+    }
 }
