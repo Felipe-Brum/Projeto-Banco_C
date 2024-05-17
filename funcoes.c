@@ -79,3 +79,25 @@ void debito(Cliente clientes[], int num_clientes) {
 
     printf("CPF ou senha incorretos!\n");
 }
+
+void deposito(Cliente clientes[], int num_clientes) {
+    char cpf[11];
+    double valor;
+    printf("Digite o CPF: ");
+    scanf("%s", cpf);
+    printf("Digite o valor a ser depositado: ");
+    scanf("%lf", &valor);
+
+    for (int i = 0; i < num_clientes; i++) {
+        if (strcmp(clientes[i].cpf, cpf) == 0) {
+            clientes[i].saldo += valor;
+            strcpy(clientes[i].operacoes[clientes[i].num_operacoes].tipo, "Deposito");
+            clientes[i].operacoes[clientes[i].num_operacoes].valor = valor;
+            clientes[i].num_operacoes++;
+            printf("Depósito realizado com sucesso!\n");
+            return;
+        }
+    }
+
+    printf("CPF não encontrado!\n");
+}
